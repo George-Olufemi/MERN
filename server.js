@@ -1,10 +1,19 @@
+//.env
+require('dotenv').config();
 const express = require('express');
 const app = express();
 
+//middleware
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    next();
+});
+
 app.get('/', (req, res) => {
-    res.send('<h1>Hello World!</h1>');
+    res.json({"message": "Welcome to the app"});
 })
 
-app.listen(4000, () => {
-    console.log('Port 4000 is running');
+
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
